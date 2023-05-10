@@ -1,0 +1,7 @@
+.darkmode {
+  background: rgb(29, 42, 50);
+  color: white;
+}
+* {
+  border-color: rgb(25, 35, 41);
+}
