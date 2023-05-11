@@ -1,11 +1,10 @@
-import Button from "../../../components/Button";
 import { Link } from "react-router-dom";
 import ConnectButton from "../../../components/Button/ConnectButton";
 
 const Header = ({ darkmode, setDarkMode }) => {
   return (
     <header
-      className={` border-b border-[rgb(204,104,50)] shadow shadow-[#636e75] w-full z-20 fixed  ${
+      className={` border-b border-[rgb(204,104,50)] shadow shadow-[#636e75] w-screen z-20 fixed  ${
         darkmode ? "bg-[#1D2A32]" : "bg-[#f9e8d0]"
       }`}
     >
@@ -151,17 +150,28 @@ const Header = ({ darkmode, setDarkMode }) => {
                   </svg>
                 </button>
 
-                <div className="hidden md:flex w-full">AKASHI: 0</div>
+                <div className="hidden lg:flex w-full">AKASHI: 0</div>
                 <div
-                  className={`rounded-full ${
-                    darkmode ? "border-white" : "border-[#CC6832]"
-                  } border px-4 py-1 text-sm`}
+                  className="flex justify-center space-x-2 md:space-x-5"
+                  style={{ width: "calc(100% - 25px)" }}
                 >
-                  <select className="bg-transparent" defaultValue={"Ethereum"}>
-                    <option value={"Ethereum"}>Ethereum</option>
-                  </select>
+                  <div
+                    className={`rounded-full ${
+                      darkmode ? "border-white" : "border-[#CC6832]"
+                    } border px-4 py-1 text-sm`}
+                  >
+                    <select
+                      className="bg-transparent"
+                      defaultValue={"Ethereum"}
+                    >
+                      <option value={"Ethereum"}>Ethereum</option>
+                    </select>
+                  </div>
+                  <ConnectButton
+                    image="btn1.png"
+                    label="Connect"
+                  ></ConnectButton>
                 </div>
-                <ConnectButton image="btn1.png" label="Connect"></ConnectButton>
               </div>
             </li>
           </ul>
