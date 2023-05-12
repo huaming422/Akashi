@@ -10,7 +10,7 @@ const Button = ({ image, label, bold }) => {
     >
       <div className="flex justify-center w-full items-center">
         <img src={image} className="mr-2" alt="for-button" />
-        <div>{label}</div>
+        <div className="whitespace-nowrap">{label}</div>
       </div>
     </button>
   );

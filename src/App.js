@@ -9,6 +9,8 @@ import "./dark.css";
 import Home from "./pages/Home";
 import Header from "./containers/Layouts/Header";
 import Footer from "./containers/Layouts/Footer";
+import Burn from "./pages/burn/burn";
+import Cloud from "./pages/cloud/cloud";
 import { useState } from "react";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Header darkmode={darkmode} setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<Home darkmode={darkmode} />} />
+          <Route path="/cloud" element={<Cloud darkmode={darkmode} />} />
+          <Route path="/burn" element={<Burn darkmode={darkmode} />} />
         </Routes>
         <Footer darkmode={darkmode} />
       </Router>

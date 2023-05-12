@@ -1,8 +1,8 @@
 import React from "react";
 
-const Card = ({ data }) => {
+const Card = ({ data , style }) => {
   return (
-    <div className="rounded-xl mx-10 my-5 md:mx-5 shadow shadow-[#151c20]">
+    <div className={`${style} rounded-xl mx-10 my-5 md:mx-5 shadow shadow-[#151c20]`}>
       {data.map((item) => {
         return (
           <div className="grid grid-cols-1 sm:grid-cols-2 p-5" key={item.label}>
