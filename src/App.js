@@ -11,24 +11,30 @@ import Header from "./containers/Layouts/Header";
 import Footer from "./containers/Layouts/Footer";
 import Burn from "./pages/burn/burn";
 import Cloud from "./pages/cloud/cloud";
-import { useState } from "react";
+import { NotificationContainer } from "react-notifications";
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
 
 function App() {
-  const [darkmode, setDarkMode] = useState(true);
+  const {
+    themeMode,
+    setThemeMode
+  } = useContext(AppContext);
 
   return (
     <div
-      className={`App flex flex-col bg-[#F9E8D0] ${darkmode ? "darkmode" : ""}`}
+      className={`App flex flex-col bg-[#F9E8D0] ${themeMode ? "darkmode" : ""}`}
       style={{ minHeight: "100vh" }}
     >
+      <NotificationContainer />
       <Router>
-        <Header darkmode={darkmode} setDarkMode={setDarkMode} />
+        <Header darkmode={themeMode} setDarkMode={setThemeMode} />
         <Routes>
-          <Route path="/" element={<Home darkmode={darkmode} />} />
-          <Route path="/cloud" element={<Cloud darkmode={darkmode} />} />
-          <Route path="/burn" element={<Burn darkmode={darkmode} />} />
+          <Route path="/" element={<Home darkmode={themeMode} />} />
+          <Route path="/cloud" element={<Cloud darkmode={themeMode} />} />
+          <Route path="/burn" element={<Burn darkmode={themeMode} />} />
         </Routes>
-        <Footer darkmode={darkmode} />
+        <Footer darkmode={themeMode} />
       </Router>
     </div>
   );

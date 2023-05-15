@@ -1,9 +1,22 @@
 import ConnectButton from "../../../components/Button/ConnectButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IconThemeToggle, Logo1, Logo2 } from "../../../components/svg/icon";
+import { AppContext } from "../../../context/AppContext";
+import { NotificationManager } from "react-notifications";
+import { shortenAddress } from "../../../utility/Utils";
 
 const Header = ({ darkmode, setDarkMode }) => {
+  const {
+    account,
+    connectWallet,
+    disconnectWallet,
+  } = useContext(AppContext);
+
+  // eslint-disable-next-line
+  const [loading, setLoading] = useState(false)
+  const [shortaddress, setShortAddress] = useState("");
+
   const [links, setLinks] = useState({
     dashboard: "",
     cloud: "",
@@ -24,8 +37,29 @@ const Header = ({ darkmode, setDarkMode }) => {
     }));
     // eslint-disable-next-line
   }, [location.pathname]);
+
   const { dashboard, cloud, burn, stake, farm } = links;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
+  const handleConnect = () => {
+    setLoading(true);
+    connectWallet()
+      .then((res) => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        NotificationManager.warning('Warning', error.message, 3000);
+        setLoading(false);
+      })
+  }
+
+  useEffect(() => {
+    if (account) {
+      const vlaue = shortenAddress(account)
+      setShortAddress(vlaue);
+    }
+  }, [account])
 
   return (
     <header
@@ -106,10 +140,20 @@ const Header = ({ darkmode, setDarkMode }) => {
                       <option value={"Ethereum"}>Ethereum</option>
                     </select>
                   </div>
-                  <ConnectButton
-                    image="btn1.png"
-                    label="Connect"
-                  ></ConnectButton>
+                  {
+                    account ?
+                      <ConnectButton
+                        image="btn1.png"
+                        label={shortaddress}
+                        handleClick={disconnectWallet}
+                      ></ConnectButton>
+                      :
+                      <ConnectButton
+                        image="btn1.png"
+                        label="Connect"
+                        handleClick={handleConnect}
+                      ></ConnectButton>
+                  }
                 </div>
               </div>
             </li>
